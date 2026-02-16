@@ -1,83 +1,655 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GAConnect Privacy Policy</title>
+  <title>GAConnect — Privacy Policy</title>
+
+  <!-- Optional typography (clean, modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
-    :root { --bg:#f6f7fb; --card:#ffffff; --text:#1f2937; --muted:#4b5563; --line:#e5e7eb; --accent:#0f766e; }
-    * { box-sizing: border-box; }
-    body { margin:0; font-family: "Segoe UI", Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
-    .wrap { max-width: 900px; margin: 32px auto; padding: 0 16px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:24px; }
-    h1,h2 { margin:0 0 12px; line-height:1.3; }
-    h1 { font-size: 1.9rem; color: var(--accent); }
-    h2 { font-size: 1.2rem; margin-top:24px; }
-    p,li { color: var(--muted); }
-    ul { padding-left: 18px; }
-    .meta { font-size:.92rem; color:#6b7280; margin-top:6px; }
-    a { color:#0b63ce; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .footer { margin-top:24px; font-size:.9rem; color:#6b7280; border-top:1px solid var(--line); padding-top:12px; }
+    :root{
+      /* App-like blues (header gradient) */
+      --blue-900:#163a9c;
+      --blue-800:#1c46b8;
+      --blue-700:#2a56d6;
+      --blue-650:#2f5fe6;
+      --blue-600:#3569ff;
+      --blue-100:#eaf1ff;
+
+      /* Backgrounds */
+      --bg:#f3f6fb;
+      --bg2:#eef3ff;
+
+      /* Surfaces */
+      --card:#ffffff;
+      --line:#e6edf7;
+
+      /* Text */
+      --text:#0f172a;
+      --muted:#475569;
+      --muted2:#64748b;
+
+      /* Status */
+      --danger:#dc2626;
+      --danger2:#ef4444;
+
+      /* Shadows & radius */
+      --shadow: 0 18px 50px rgba(15, 23, 42, .10);
+      --shadow2: 0 12px 28px rgba(15, 23, 42, .08);
+      --shadow3: 0 8px 18px rgba(15, 23, 42, .06);
+
+      --r-xl: 20px;
+      --r-lg: 16px;
+      --r-md: 14px;
+
+      --ring: 0 0 0 4px rgba(53,105,255,.18);
+
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 520px at 50% -220px, rgba(53,105,255,.18), transparent 60%),
+        radial-gradient(900px 420px at 20% -260px, rgba(53,105,255,.10), transparent 62%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x:hidden;
+      line-height: 1.6;
+    }
+
+    .topband{
+      background: linear-gradient(90deg, var(--blue-800), var(--blue-650));
+      color:#fff;
+      padding: 28px 0 68px;
+      position:relative;
+      overflow:hidden;
+      border-bottom-left-radius: 26px;
+      border-bottom-right-radius: 26px;
+      box-shadow: 0 20px 40px rgba(28,70,184,.22);
+    }
+    .topband:before{
+      content:"";
+      position:absolute;
+      inset:-40% -20% auto -20%;
+      height:240px;
+      background: radial-gradient(closest-side, rgba(255,255,255,.22), transparent 72%);
+      transform: rotate(-6deg);
+      pointer-events:none;
+    }
+
+    .topbar{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .logo{
+      width:44px;height:44px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 12px 22px rgba(0,0,0,.14);
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size: 20px;
+      font-weight: 850;
+      letter-spacing: .2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand .sub{
+      margin: 5px 0 0;
+      font-size: 13px;
+      opacity:.90;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
+      color:#fff;
+      text-decoration:none;
+      font-weight: 750;
+      font-size: 13px;
+      box-shadow: 0 12px 20px rgba(0,0,0,.12);
+      transition: transform .12s ease, background .12s ease;
+      user-select:none;
+      cursor:pointer;
+      flex: 0 0 auto;
+    }
+    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.18); }
+
+    .wrap{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px 64px;
+    }
+
+    .page{
+      margin-top: -52px;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .cardHead{
+      padding: 22px 22px 12px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 14px;
+    }
+
+    .title h2{
+      margin:0;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      color: var(--text);
+    }
+    .title p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 80ch;
+      font-size: 14px;
+    }
+
+    .meta{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: #f7faff;
+      border: 1px solid var(--line);
+      color: #52607a;
+      font-size: 12.5px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .content{
+      padding: 0 22px 22px;
+    }
+
+    /* Pro section blocks (clean, app-like) */
+    .section{
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      background: linear-gradient(180deg, #ffffff, #fbfdff);
+      box-shadow: var(--shadow3);
+      padding: 16px 16px;
+      margin-top: 12px;
+    }
+
+    .sectionHead{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .num{
+      width:40px;height:40px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      color: var(--blue-800);
+      background: var(--blue-100);
+      border: 1px solid rgba(53,105,255,.18);
+      box-shadow: 0 10px 18px rgba(53,105,255,.12);
+      flex: 0 0 auto;
+    }
+
+    .section h3{
+      margin: 2px 0 0;
+      font-size: 16px;
+      font-weight: 950;
+      letter-spacing: -.01em;
+      color:#142036;
+    }
+
+    .section .body{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .kv{
+      margin-top: 10px;
+      display:grid;
+      gap: 8px;
+    }
+    .kvRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: #f7faff;
+      border: 1px solid var(--line);
+      color: #44516b;
+      font-size: 13.5px;
+    }
+    .kvRow b{
+      color:#1f2a3d;
+      font-weight: 900;
+      min-width: 180px;
+    }
+
+    ul{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    li{ margin: 6px 0; }
+
+    a{
+      color: var(--blue-800);
+      font-weight: 800;
+      text-decoration:none;
+    }
+    a:hover{ text-decoration: underline; }
+
+    /* Helpful callout */
+    .callout{
+      margin-top: 12px;
+      border-radius: var(--r-lg);
+      border: 1px dashed rgba(53,105,255,.35);
+      background: rgba(234,241,255,.55);
+      padding: 12px 14px;
+      color:#3b4a68;
+      font-size: 13.5px;
+      font-weight: 650;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .footer{
+      margin-top: 14px;
+      padding: 14px 16px 16px;
+      border-top: 1px solid var(--line);
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      align-items:center;
+      justify-content:space-between;
+      color: #6b7280;
+      font-size: 12.8px;
+    }
+
+    .icon{ width:18px;height:18px; display:inline-block; }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce){
+      .pill{ transition:none; }
+    }
   </style>
 </head>
+
 <body>
-  <main class="wrap">
-    <section class="card">
-      <h1>GAConnect Privacy Policy</h1>
-      <p class="meta">Last updated: 2026-02-12</p>
-
-      <p>
-        This Privacy Policy explains how GAConnect processes data when you use the mobile application.
-      </p>
-
-      <h2>1. Data We Process</h2>
-      <ul>
-        <li>Authentication/session data (tokens, user identity claims)</li>
-        <li>Operational app data (device status, logs, exported files)</li>
-        <li>Network-related metadata required for Wi‑Fi/gateway workflows</li>
-      </ul>
-
-      <h2>2. Why We Process Data</h2>
-      <ul>
-        <li>To authenticate users and keep sessions secure</li>
-        <li>To provide core app functionality (monitoring, diagnostics, exports)</li>
-        <li>To support troubleshooting and service continuity</li>
-      </ul>
-
-      <h2>3. Storage and Security</h2>
-      <ul>
-        <li>Sensitive values are stored using encrypted secure storage mechanisms where applicable</li>
-        <li>Network communication is intended to use HTTPS in production</li>
-      </ul>
-
-      <h2>4. Sharing</h2>
-      <p>
-        GAConnect does not use ad SDKs in this app version. Data may be processed by required service providers
-        (e.g. authentication infrastructure) to operate core features.
-      </p>
-
-      <h2>5. Retention</h2>
-      <p>
-        Data is retained only as long as required for app functionality, account/session lifecycle, legal obligations,
-        or user-initiated support/export operations.
-      </p>
-
-      <h2>6. Account Deletion</h2>
-      <p>
-        You can request account deletion from within the app and/or via:
-        <a href="https://YOUR-DOMAIN/delete-account.html">Account Deletion Page</a>
-      </p>
-
-      <h2>7. Contact</h2>
-      <p>
-        For privacy requests and support, contact: <a href="mailto:privacy@yourdomain.com">privacy@yourdomain.com</a>
-      </p>
-
-      <div class="footer">
-        Replace placeholder links/emails before publishing.
+  <header class="topband">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M6 14.5c0-4.2 3-7.5 6.8-7.5 2.8 0 5.1 1.7 6.2 4.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 14.5c0 2.6 2.2 4.8 4.8 4.8 1.6 0 3-.8 3.9-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19 11.2l-.7 6.6" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div style="min-width:0">
+          <h1>GAConnect</h1>
+          <div class="sub">Industrial Gateway • Privacy Policy</div>
+        </div>
       </div>
-    </section>
-  </main>
+
+      <a class="pill" href="#contact" aria-label="Jump to contact section">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 8l8 5 8-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        Contact
+      </a>
+    </div>
+  </header>
+
+  <div class="wrap page">
+    <main class="card" aria-label="Privacy Policy">
+      <div class="cardHead">
+        <div class="title">
+          <h2>Privacy Policy</h2>
+          <p>
+            This Privacy Policy explains how <b>[Company Legal Name]</b> ("we", "us", "our") collects, uses, stores, shares,
+            and deletes data when you use <b>[App Name]</b> ("the App").
+          </p>
+        </div>
+
+        <div class="meta" title="Last updated">
+          <span aria-hidden="true">🗓️</span>
+          Last updated: February 16, 2026
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="callout" role="note" aria-label="Publishing note">
+          <span aria-hidden="true">ℹ️</span>
+          Replace placeholder fields like <b>[Company Legal Name]</b>, <b>[App Name]</b>, and emails/URLs before publishing.
+        </div>
+
+        <!-- 1 -->
+        <section class="section" id="who-we-are">
+          <div class="sectionHead">
+            <div class="num">1</div>
+            <div>
+              <h3>Who We Are</h3>
+              <div class="body">
+                <div class="kv">
+                  <div class="kvRow"><b>Developer / Company</b> <span>[Company Legal Name]</span></div>
+                  <div class="kvRow"><b>App</b> <span>[App Name]</span></div>
+                  <div class="kvRow"><b>Contact email</b> <span>[privacy@yourdomain.com]</span></div>
+                  <div class="kvRow"><b>Contact address</b> <span>[Company Address] (optional but recommended)</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="section" id="scope">
+          <div class="sectionHead">
+            <div class="num">2</div>
+            <div>
+              <h3>Scope</h3>
+              <div class="body">
+                This Policy applies to the mobile app <b>[App Name]</b>, related services, and support channels.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3 -->
+        <section class="section" id="data-we-collect">
+          <div class="sectionHead">
+            <div class="num">3</div>
+            <div>
+              <h3>Data We Collect</h3>
+              <div class="body">
+                We may process the following categories of data:
+                <ul>
+                  <li>Account and authentication data (for example: user ID, session tokens, organization ID).</li>
+                  <li>Network and connectivity data (for example: Wi-Fi SSID, gateway IP, network metadata) used to verify intended device/network connection.</li>
+                  <li>Device identifiers used by the app workflow (for example: device serial references).</li>
+                  <li>Operational telemetry and diagnostics (for example: Modbus data, logs, error events).</li>
+                  <li>App usage and technical diagnostics (for example: crash logs, performance data).</li>
+                  <li>Support request data you provide voluntarily.</li>
+                </ul>
+                <div class="callout" style="margin-top:12px;">
+                  <span aria-hidden="true">✅</span>
+                  If a data type is not collected in your build, remove it from this list.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4 -->
+        <section class="section" id="how-we-collect">
+          <div class="sectionHead">
+            <div class="num">4</div>
+            <div>
+              <h3>How We Collect Data</h3>
+              <div class="body">
+                We collect data:
+                <ul>
+                  <li>Directly from you (sign-in, manual input, support requests).</li>
+                  <li>Automatically from the app/device during app operation.</li>
+                  <li>From integrated service providers required for authentication, infrastructure, or diagnostics.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5 -->
+        <section class="section" id="why-we-use">
+          <div class="sectionHead">
+            <div class="num">5</div>
+            <div>
+              <h3>Why We Use Data</h3>
+              <div class="body">
+                We use data to:
+                <ul>
+                  <li>Authenticate users and provide authorized access.</li>
+                  <li>Establish and maintain secure connectivity to target infrastructure.</li>
+                  <li>Provide core app functionality and device-specific history.</li>
+                  <li>Monitor reliability, troubleshoot issues, and improve service quality.</li>
+                  <li>Send critical status or fault notifications.</li>
+                  <li>Meet legal, security, and compliance obligations.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6 -->
+        <section class="section" id="sharing">
+          <div class="sectionHead">
+            <div class="num">6</div>
+            <div>
+              <h3>Data Sharing</h3>
+              <div class="body">
+                <p style="margin:0;color:var(--muted);">
+                  We do not sell personal data.
+                </p>
+                <p style="margin:10px 0 0;color:var(--muted);">
+                  We may share limited data with service providers strictly to operate the service (for example:
+                  identity/authentication provider, cloud hosting, diagnostics/monitoring provider), under contractual and
+                  security controls.
+                </p>
+                <p style="margin:10px 0 0;color:var(--muted);">
+                  We may also disclose data when required by law or to protect rights, safety, and security.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7 -->
+        <section class="section" id="retention">
+          <div class="sectionHead">
+            <div class="num">7</div>
+            <div>
+              <h3>Data Retention</h3>
+              <div class="body">
+                We retain data only as long as necessary for the purposes described in this Policy, including legal, security,
+                fraud-prevention, and operational requirements.
+                <div style="margin-top:10px;color:var(--muted);">
+                  Retention periods vary by data type and legal obligations.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8 -->
+        <section class="section" id="deletion">
+          <div class="sectionHead">
+            <div class="num">8</div>
+            <div>
+              <h3>Data Deletion and User Requests</h3>
+              <div class="body">
+                If your app account supports deletion, users can request account deletion:
+                <ul>
+                  <li>In-app: <b>[Describe path, e.g., Settings &gt; Delete Account]</b></li>
+                  <li>On the web: <b>[ACCOUNT_DELETION_URL]</b></li>
+                </ul>
+                <div style="margin-top:10px;color:var(--muted);">
+                  When an account deletion request is completed, associated account data is deleted unless retention is required
+                  by law, security, fraud prevention, or regulatory obligations. Where retention is required, we inform users accordingly.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9 -->
+        <section class="section" id="security">
+          <div class="sectionHead">
+            <div class="num">9</div>
+            <div>
+              <h3>Security</h3>
+              <div class="body">
+                We implement reasonable technical and organizational safeguards, including encryption and access controls where appropriate.
+                <div style="margin-top:10px;color:var(--muted);">
+                  No system is 100% secure, but we continuously work to protect data.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10 -->
+        <section class="section" id="transfers">
+          <div class="sectionHead">
+            <div class="num">10</div>
+            <div>
+              <h3>International Transfers</h3>
+              <div class="body">
+                If applicable, data may be processed in countries other than your own, subject to applicable safeguards and legal requirements.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11 -->
+        <section class="section" id="children">
+          <div class="sectionHead">
+            <div class="num">11</div>
+            <div>
+              <h3>Children’s Privacy</h3>
+              <div class="body">
+                The App is not directed to children under the age required by applicable law.
+                <div style="margin-top:10px;color:var(--muted);">
+                  We do not knowingly collect personal data from children in violation of applicable law.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12 -->
+        <section class="section" id="rights">
+          <div class="sectionHead">
+            <div class="num">12</div>
+            <div>
+              <h3>Your Rights</h3>
+              <div class="body">
+                Depending on your jurisdiction, you may have rights to access, correct, delete, restrict, or object to processing of your data,
+                and to withdraw consent where applicable.
+                <div style="margin-top:10px;color:var(--muted);">
+                  To submit a request, contact: <b>[privacy@yourdomain.com]</b>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 13 -->
+        <section class="section" id="changes">
+          <div class="sectionHead">
+            <div class="num">13</div>
+            <div>
+              <h3>Changes to This Policy</h3>
+              <div class="body">
+                We may update this Policy from time to time.
+                <div style="margin-top:10px;color:var(--muted);">
+                  We will post the updated version at this URL and revise the “Last updated” date.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14 -->
+        <section class="section" id="contact">
+          <div class="sectionHead">
+            <div class="num">14</div>
+            <div>
+              <h3>Contact</h3>
+              <div class="body">
+                For privacy questions or requests, contact:
+                <div class="kv" style="margin-top:10px;">
+                  <div class="kvRow"><b>Email</b> <span>[privacy@yourdomain.com]</span></div>
+                  <div class="kvRow"><b>Company</b> <span>[Company Legal Name]</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="footer">
+          <div>© GAConnect</div>
+          <div>
+            Related page:
+            <a href="./delete-account.html">Account Deletion</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Smooth anchor scroll (nice feel)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const id = a.getAttribute("href");
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
+  </script>
 </body>
 </html>
