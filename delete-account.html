@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GAConnect — Hesap Silme Talebi</title>
+  <title>GAConnect — Account Deletion Request</title>
 
   <style>
     :root{
-      /* App teması (ekrandaki mavi header hissi) */
+      /* App theme (blue header feel) */
       --primary-900:#163a9c;
       --primary-800:#1c46b8;
       --primary-700:#2a56d6;
@@ -22,14 +22,12 @@
 
       --danger:#b91c1c;
       --danger-600:#dc2626;
-      --success:#16a34a;
 
       --shadow: 0 14px 40px rgba(15, 23, 42, .10);
       --shadow-soft: 0 10px 25px rgba(15, 23, 42, .08);
 
       --radius-xl: 18px;
       --radius-lg: 14px;
-      --radius-md: 12px;
 
       --ring: 0 0 0 4px rgba(53,105,255,.18);
 
@@ -48,7 +46,7 @@
       line-height:1.55;
     }
 
-    /* Top header (app ile aynı his) */
+    /* Top header */
     .topbar{
       background: linear-gradient(90deg, var(--primary-800), var(--primary-700));
       color:#fff;
@@ -363,17 +361,7 @@
     }
     .links a:hover{ text-decoration: underline; }
 
-    /* Small niceties */
     .icon{ width:18px;height:18px; display:inline-block; }
-    .sr-only{
-      position:absolute;
-      width:1px;height:1px;
-      padding:0;margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;
-      border:0;
-    }
   </style>
 </head>
 
@@ -384,7 +372,6 @@
       <div class="brandrow">
         <div class="brand">
           <div class="logo" aria-hidden="true">
-            <!-- Basit GA ikonu (istersen gerçek logoyla değiştir) -->
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
               <path d="M6 14.5c0-4.2 3-7.5 6.8-7.5 2.8 0 5.1 1.7 6.2 4.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
               <path d="M6 14.5c0 2.6 2.2 4.8 4.8 4.8 1.6 0 3-.8 3.9-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -393,7 +380,7 @@
           </div>
           <div style="min-width:0">
             <h1>GAConnect</h1>
-            <p class="sub">Industrial Gateway • Hesap & Veri Silme Talebi</p>
+            <p class="sub">Industrial Gateway • Account & Data Deletion</p>
           </div>
         </div>
 
@@ -402,7 +389,7 @@
             <path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="white" stroke-width="2"/>
           </svg>
-          Talep Oluştur
+          Create Request
         </a>
       </div>
     </div>
@@ -410,23 +397,23 @@
 
   <main class="page">
     <div class="container">
-      <section class="card" aria-label="GAConnect hesap silme">
+      <section class="card" aria-label="GAConnect account deletion">
         <div class="cardhead">
           <div class="titleblock">
-            <h2>Hesap Silme Talebi</h2>
+            <h2>Account Deletion Request</h2>
             <p>
-              Bu sayfadan GAConnect hesabınızın ve ilişkili kişisel verilerinizin kalıcı olarak silinmesini talep edebilirsiniz.
+              You can request permanent deletion of your GAConnect account and related personal data from this page.
             </p>
           </div>
-          <div class="meta" title="Sayfa güncelleme tarihi">
+          <div class="meta" title="Page update date">
             <span aria-hidden="true">🗓️</span>
-            Son güncelleme: 2026-02-12
+            Last updated: 2026-02-12
           </div>
         </div>
 
         <div class="content">
 
-          <div class="alert" role="note" aria-label="Önemli uyarı">
+          <div class="alert" role="note" aria-label="Important notice">
             <div class="badge" aria-hidden="true">
               <svg class="icon" viewBox="0 0 24 24" fill="none">
                 <path d="M12 9v5" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/>
@@ -435,64 +422,61 @@
               </svg>
             </div>
             <div>
-              <strong>Önemli:</strong>
-              <p>Silme işlemi geri alınamaz. Tamamlandığında hesap geçmişi ve uygulama servislerine erişiminiz kalıcı olarak sona erebilir.</p>
+              <strong>Important:</strong>
+              <p>Deletion is irreversible. After completion, you may permanently lose access to account history and app services.</p>
             </div>
           </div>
 
           <div class="grid">
-            <!-- Sol kolon: adımlar -->
             <div class="step">
               <div class="stephead">
                 <div class="stepnum">1</div>
                 <div>
-                  <h3>Uygulama Üzerinden (Önerilen)</h3>
+                  <h3>Recommended In-App Method</h3>
                   <p>
-                    Hesabınıza giriş yapabiliyorsanız en hızlı yöntem uygulama içindeki <strong>“Hesabı Sil”</strong> akışını kullanmaktır.
+                    If you can sign in, the fastest option is to use the in-app <strong>“Delete Account”</strong> flow.
                   </p>
 
                   <div class="kicker">
                     <span aria-hidden="true">ℹ️</span>
-                    Uygulamada giriş açıksa kimlik doğrulama daha hızlı tamamlanır.
+                    If you're signed in, ownership verification is typically faster.
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Sağ kolon: web talep -->
             <div class="step" id="request">
               <div class="stephead">
                 <div class="stepnum">2</div>
                 <div>
-                  <h3>Web Üzerinden Silme Talebi</h3>
+                  <h3>Web Deletion Request</h3>
                   <p>
-                    Uygulamaya erişemiyorsanız aşağıdaki formu doldurun ve e-posta ile talep gönderin.
+                    If you cannot access the app, fill out the form below and send a request by email.
                   </p>
 
                   <form class="form" onsubmit="return false;">
                     <div>
-                      <label for="email">Hesap e-postası</label>
+                      <label for="email">Account email</label>
                       <div class="field">
                         <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
                       </div>
-                      <div class="hint">Bu bilgi hesap sahipliğini doğrulamak için kullanılır.</div>
+                      <div class="hint">This is used to verify account ownership.</div>
                     </div>
 
                     <div>
-                      <label for="reason">Talep detayı (opsiyonel)</label>
+                      <label for="reason">Request details (optional)</label>
                       <div class="field">
-                        <textarea id="reason" rows="5" placeholder="GAConnect hesabımın ve ilişkili kişisel verilerimin silinmesini talep ediyorum."></textarea>
+                        <textarea id="reason" rows="5" placeholder="I request deletion of my GAConnect account and associated personal data."></textarea>
                       </div>
                     </div>
 
                     <div class="actions">
-                      <!-- TODO: gerçek mail adresini yaz -->
-                      <a class="btn btn-primary" id="mailtoBtn" href="mailto:privacy@yourdomain.com">
+                      <a class="btn btn-primary" id="mailtoBtn" href="mailto:beyzanurkarakoc@venobe.com">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                           <path d="M4 8l8 5 8-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           <path d="M20 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
                         </svg>
-                        Silme Talebi Gönder
+                        Send Deletion Request
                       </a>
 
                       <button class="btn btn-danger" type="button" id="clearBtn">
@@ -501,12 +485,12 @@
                           <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
                           <path d="M8 7l1 14h6l1-14" stroke="#b91c1c" stroke-width="2" stroke-linejoin="round"/>
                         </svg>
-                        Formu Temizle
+                        Clear Form
                       </button>
                     </div>
 
                     <div class="hint">
-                      Buton, varsayılan e-posta istemcinizi açar ve form bilgilerini mesaja ekler.
+                      The button opens your default email client and pre-fills the message with your details.
                     </div>
                   </form>
                 </div>
@@ -518,11 +502,11 @@
             <div class="stephead">
               <div class="stepnum">3</div>
               <div>
-                <h3>Sonraki Süreç</h3>
+                <h3>What Happens Next</h3>
                 <ul>
-                  <li>Talebiniz hesap sahipliğini doğrulamak için incelenir.</li>
-                  <li>Hesabınız aktif sistemlerden silinir.</li>
-                  <li>Yalnızca yasal zorunluluklar kapsamında sınırlı kayıtlar saklanabilir.</li>
+                  <li>Your request is reviewed to verify account ownership.</li>
+                  <li>Your account is deleted from active systems.</li>
+                  <li>Some records may be retained only when legally required.</li>
                 </ul>
               </div>
             </div>
@@ -530,16 +514,15 @@
 
           <div class="footer">
             <div class="links">
-              <!-- TODO: gerçek linkleri yaz -->
-              <span>İletişim: <a href="mailto:privacy@yourdomain.com">privacy@yourdomain.com</a></span>
+              <span>Privacy contact: <a href="mailto:beyzanurkarakoc@venobe.com">beyzanurkarakoc@venobe.com</a></span>
               <span style="margin-left:10px;">•</span>
-              <span style="margin-left:10px;">Politika: <a href="https://YOUR-DOMAIN/privacy.html">Gizlilik Politikası</a></span>
+              <span style="margin-left:10px;">Policy: <a href="https://YOUR-DOMAIN/privacy.html">Privacy Policy</a></span>
             </div>
             <div>© GAConnect</div>
           </div>
 
           <p class="hint" style="margin-top:12px;">
-            <strong>Not:</strong> Yayına almadan önce <em>privacy@yourdomain.com</em> ve gizlilik politikası bağlantısını gerçek değerlerle değiştirin.
+            <strong>Note:</strong> Replace the Privacy Policy link with your real URL before publishing.
           </p>
 
         </div>
@@ -548,9 +531,9 @@
   </main>
 
   <script>
-    // Mailto’yu form verisiyle otomatik doldur (profesyonel UX)
-    const SUPPORT_EMAIL = "privacy@yourdomain.com"; // TODO: değiştir
-    const SUBJECT = "GAConnect Hesap Silme Talebi";
+    // Auto-fill mailto with form data (better UX)
+    const SUPPORT_EMAIL = "beyzanurkarakoc@venobe.com";
+    const SUBJECT = "GAConnect Account Deletion Request";
 
     const emailEl  = document.getElementById("email");
     const reasonEl = document.getElementById("reason");
@@ -562,16 +545,16 @@
       const details = (reasonEl.value || "").trim();
 
       const bodyLines = [
-        "Merhaba,",
+        "Hello,",
         "",
-        "GAConnect hesabımın ve ilişkili kişisel verilerimin kalıcı olarak silinmesini talep ediyorum.",
+        "I request permanent deletion of my GAConnect account and associated personal data.",
         "",
-        "Hesap e-postası: " + (accountEmail || "[buraya e-posta yazın]"),
+        "Account email: " + (accountEmail || "[please enter your email]"),
         details ? "" : "",
-        details ? "Talep detayı:" : "",
+        details ? "Request details:" : "",
         details ? details : "",
         "",
-        "Teşekkürler."
+        "Thank you."
       ].filter(Boolean);
 
       const href =
@@ -592,7 +575,6 @@
       emailEl.focus();
     });
 
-    // İlk yüklemede hazırla
     buildMailto();
   </script>
 </body>
