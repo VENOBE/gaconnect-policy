@@ -5,33 +5,42 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GAConnect — Account Deletion Request</title>
 
+  <!-- Optional: premium typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      /* App theme (blue header feel) */
-      --primary-900:#163a9c;
-      --primary-800:#1c46b8;
-      --primary-700:#2a56d6;
-      --primary-600:#3569ff;
-      --primary-100:#eaf1ff;
+      --bg0:#060A16;
+      --bg1:#0B1635;
+      --bg2:#0B2A7A;
 
-      --bg:#f3f6fb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --line:#e6edf7;
+      --p900:#14309e;
+      --p800:#1c46b8;
+      --p700:#2a56d6;
+      --p600:#3569ff;
 
-      --danger:#b91c1c;
-      --danger-600:#dc2626;
+      --card: rgba(255,255,255,.07);
+      --card2: rgba(255,255,255,.10);
+      --line: rgba(255,255,255,.12);
 
-      --shadow: 0 14px 40px rgba(15, 23, 42, .10);
-      --shadow-soft: 0 10px 25px rgba(15, 23, 42, .08);
+      --text:#EAF0FF;
+      --muted:#B9C6E6;
+      --muted2:#93A7D6;
 
-      --radius-xl: 18px;
-      --radius-lg: 14px;
+      --danger:#ff3b3b;
+      --danger2:#ff6b6b;
 
-      --ring: 0 0 0 4px rgba(53,105,255,.18);
+      --shadow: 0 30px 80px rgba(0,0,0,.45);
+      --shadow2: 0 20px 50px rgba(0,0,0,.35);
 
-      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      --r-xl: 22px;
+      --r-lg: 16px;
+
+      --ring: 0 0 0 5px rgba(53,105,255,.25);
+
+      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
     }
 
     *{ box-sizing:border-box; }
@@ -39,506 +48,765 @@
     body{
       margin:0;
       font-family:var(--font);
-      background:
-        radial-gradient(1200px 400px at 50% -120px, rgba(53,105,255,.18), transparent 60%),
-        var(--bg);
       color:var(--text);
-      line-height:1.55;
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(53,105,255,.35), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(98,0,255,.18), transparent 60%),
+        radial-gradient(800px 650px at 40% 100%, rgba(0,255,209,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 45%, #070A14);
+      overflow-x:hidden;
     }
 
-    /* Top header */
-    .topbar{
-      background: linear-gradient(90deg, var(--primary-800), var(--primary-700));
-      color:#fff;
-      padding: 28px 0 74px;
-      position: relative;
-      overflow:hidden;
-    }
-    .topbar:before{
+    /* Subtle noise overlay */
+    body:before{
       content:"";
-      position:absolute;
-      inset:-40% -20% auto -20%;
-      height:240px;
-      background: radial-gradient(closest-side, rgba(255,255,255,.22), transparent 70%);
-      transform: rotate(-6deg);
+      position:fixed;
+      inset:0;
       pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      opacity:.35;
+      z-index:0;
     }
 
-    .container{
-      max-width: 980px;
+    /* Floating aurora blobs */
+    .blob{
+      position:fixed;
+      width:520px;height:520px;
+      border-radius: 999px;
+      filter: blur(40px);
+      opacity:.45;
+      z-index:0;
+      animation: float 18s ease-in-out infinite;
+      transform: translate3d(0,0,0);
+    }
+    .blob.b1{ left:-180px; top:-160px; background: radial-gradient(circle at 30% 30%, rgba(53,105,255,.90), transparent 60%); }
+    .blob.b2{ right:-220px; top:120px; background: radial-gradient(circle at 30% 30%, rgba(160,84,255,.70), transparent 60%); animation-duration: 22s; }
+    .blob.b3{ left:20%; bottom:-260px; background: radial-gradient(circle at 30% 30%, rgba(0,255,209,.50), transparent 60%); animation-duration: 26s; }
+    @keyframes float{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(40px,-28px,0) scale(1.05); }
+    }
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 18px;
+      padding: 28px 18px 64px;
     }
 
-    .brandrow{
+    /* Top bar */
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:16px;
+      padding: 16px 16px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(14px);
     }
+
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      min-width: 0;
+      gap:12px;
+      min-width:0;
     }
+
     .logo{
-      width:44px;height:44px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.20);
+      width:46px;height:46px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,.25), transparent 55%),
+        linear-gradient(180deg, rgba(53,105,255,.55), rgba(53,105,255,.18));
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 18px 40px rgba(53,105,255,.22);
       display:grid;
       place-items:center;
-      box-shadow: 0 10px 20px rgba(0,0,0,.12);
       flex: 0 0 auto;
-    }
-    .logo svg{ opacity:.95; }
-    .brand h1{
-      margin:0;
-      font-size: 20px;
-      font-weight: 750;
-      letter-spacing: .2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .brand .sub{
-      margin: 4px 0 0;
-      font-size: 13px;
-      opacity:.88;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.20);
-      color:#fff;
-      text-decoration:none;
-      font-weight: 650;
-      font-size: 13px;
-      box-shadow: 0 10px 18px rgba(0,0,0,.10);
-      transition: transform .12s ease, background .12s ease;
-      flex: 0 0 auto;
-    }
-    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.18); }
-
-    /* Content card */
-    .page{
-      margin-top: -54px;
-      padding-bottom: 44px;
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
+      position:relative;
       overflow:hidden;
     }
+    .logo:after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,.0), rgba(255,255,255,.22), rgba(255,255,255,.0));
+      animation: spin 4.5s linear infinite;
+      opacity:.55;
+    }
+    @keyframes spin{
+      to{ transform: rotate(360deg); }
+    }
+    .logo svg{ position:relative; z-index:1; }
 
-    .cardhead{
-      padding: 22px 22px 0;
+    .brand h1{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.28em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.88);
+      font-weight: 800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .brand .sub{
+      margin:4px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(234,240,255,.92);
+      text-decoration:none;
+      font-weight: 700;
+      box-shadow: 0 12px 24px rgba(0,0,0,.22);
+      transition: transform .14s ease, background .14s ease, border-color .14s ease;
+      user-select:none;
+      cursor:pointer;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+    .chip .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: radial-gradient(circle, #7CFFB2, #18C964);
+      box-shadow: 0 0 0 6px rgba(24,201,100,.16);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      padding: 26px 18px 14px;
+      border-radius: var(--r-xl);
+      background:
+        radial-gradient(900px 280px at 15% 0%, rgba(53,105,255,.35), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius: var(--r-xl);
+      padding:1px;
+      background: linear-gradient(90deg, rgba(53,105,255,.55), rgba(160,84,255,.38), rgba(0,255,209,.22));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .heroTop{
       display:flex;
       flex-wrap:wrap;
-      align-items:flex-start;
+      align-items:flex-end;
       justify-content:space-between;
       gap: 14px;
     }
-    .titleblock h2{
+
+    .hero h2{
       margin:0;
-      font-size: 24px;
-      letter-spacing: .2px;
-      font-weight: 800;
+      font-size: clamp(26px, 2.5vw, 34px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
     }
-    .titleblock p{
-      margin: 8px 0 0;
+
+    .hero p{
+      margin: 10px 0 0;
       color: var(--muted);
-      max-width: 64ch;
+      max-width: 70ch;
+      font-size: 14.5px;
     }
+
     .meta{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding: 8px 10px;
+      gap:10px;
+      padding: 10px 12px;
       border-radius: 999px;
-      background: #f7faff;
-      border: 1px solid var(--line);
-      color: #52607a;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(234,240,255,.86);
+      font-weight: 800;
       font-size: 12.5px;
-      font-weight: 650;
-      white-space: nowrap;
+      white-space:nowrap;
     }
 
-    .content{
-      padding: 18px 22px 22px;
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.16), transparent);
+      margin: 18px 0 12px;
+      opacity:.9;
     }
 
-    .alert{
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      background: #fff5f5;
-      border: 1px solid #fecaca;
-      border-radius: var(--radius-lg);
-      padding: 14px 14px;
-      box-shadow: var(--shadow-soft);
-      margin: 14px 0 18px;
-    }
-    .alert .badge{
-      width:34px;height:34px;
-      border-radius: 12px;
-      display:grid;
-      place-items:center;
-      background: rgba(220,38,38,.12);
-      border: 1px solid rgba(220,38,38,.22);
-      flex: 0 0 auto;
-    }
-    .alert strong{ display:block; }
-    .alert p{ margin: 4px 0 0; color:#6b7280; }
-
-    /* Steps */
-    .grid{
+    /* Main layout */
+    .main{
       display:grid;
       grid-template-columns: 1fr;
       gap: 14px;
-      margin-top: 10px;
+      margin-top: 14px;
     }
-    @media (min-width: 860px){
-      .grid{ grid-template-columns: 1.1fr .9fr; }
+    @media (min-width: 980px){
+      .main{
+        grid-template-columns: 1.15fr .85fr;
+        align-items:start;
+      }
+    }
+
+    /* Timeline steps */
+    .panel{
+      border-radius: var(--r-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow2);
+      backdrop-filter: blur(14px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .panelHeader{
+      padding: 16px 16px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .panelHeader h3{
+      margin:0;
+      font-size: 14px;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.90);
+      font-weight: 900;
+    }
+    .panelHeader .tag{
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .timeline{
+      padding: 6px 16px 16px;
+      display:grid;
+      gap: 12px;
     }
 
     .step{
-      border: 1px solid var(--line);
-      border-radius: var(--radius-xl);
-      background: linear-gradient(180deg, #ffffff, #fbfdff);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px;
-    }
-    .stephead{
-      display:flex;
-      align-items:flex-start;
+      display:grid;
+      grid-template-columns: 44px 1fr;
       gap: 12px;
+      padding: 14px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      position:relative;
+      overflow:hidden;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
     }
-    .stepnum{
-      width:40px;height:40px;
-      border-radius: 14px;
+    .step:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.20);
+    }
+    .step:before{
+      content:"";
+      position:absolute;
+      inset:-40% -30% auto -30%;
+      height:120px;
+      background: radial-gradient(closest-side, rgba(53,105,255,.18), transparent 70%);
+      pointer-events:none;
+      opacity:.7;
+    }
+
+    .num{
+      width:44px;height:44px;
+      border-radius: 16px;
       display:grid;
       place-items:center;
-      background: var(--primary-100);
-      border: 1px solid rgba(53,105,255,.20);
-      color: var(--primary-800);
-      font-weight: 850;
-      flex: 0 0 auto;
+      font-weight: 900;
+      color: rgba(234,240,255,.92);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.22), transparent 60%),
+        linear-gradient(180deg, rgba(53,105,255,.55), rgba(53,105,255,.15));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 35px rgba(53,105,255,.18);
+      position:relative;
+      overflow:hidden;
     }
-    .step h3{
-      margin: 2px 0 0;
-      font-size: 16px;
-      font-weight: 820;
-      letter-spacing: .1px;
+    .num:after{
+      content:"";
+      position:absolute;
+      inset:-60%;
+      background: conic-gradient(from 180deg, rgba(255,255,255,.0), rgba(255,255,255,.20), rgba(255,255,255,.0));
+      animation: spin 5.5s linear infinite;
+      opacity:.55;
     }
-    .step p, .step li{ color: var(--muted); }
-    .step p{ margin: 8px 0 0; }
+    .num span{ position:relative; z-index:1; }
 
-    /* Form */
-    .form{
-      margin-top: 12px;
+    .step h4{
+      margin: 4px 0 0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+    }
+    .step p, .step li{
+      color: var(--muted);
+      margin: 8px 0 0;
+      font-size: 13.8px;
+    }
+    .step ul{ margin: 10px 0 0; padding-left: 18px; }
+
+    .note{
+      margin-top: 10px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(180deg, rgba(255,59,59,.10), rgba(255,59,59,.04));
+    }
+    .note b{ display:block; }
+    .note small{ color: rgba(234,240,255,.78); display:block; margin-top: 4px; }
+
+    /* Form card (sticky on desktop) */
+    .formCard{
+      border-radius: var(--r-xl);
+      background:
+        radial-gradient(600px 240px at 30% 0%, rgba(160,84,255,.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+      overflow:hidden;
+    }
+    @media (min-width: 980px){
+      .formCard{ position: sticky; top: 16px; }
+    }
+
+    .formHead{
+      padding: 16px 16px 12px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .formHead h3{
+      margin:0;
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: -.02em;
+    }
+    .formHead p{
+      margin:8px 0 0;
+      color: var(--muted);
+      font-size: 13.6px;
+    }
+
+    .formBody{
+      padding: 0 16px 16px;
       display:grid;
       gap: 12px;
     }
+
     label{
       display:block;
-      font-size: 13px;
-      font-weight: 750;
-      color: #2b3446;
-      margin-bottom: 6px;
+      font-size: 12.5px;
+      font-weight: 900;
+      letter-spacing:.08em;
+      text-transform: uppercase;
+      color: rgba(234,240,255,.80);
+      margin-bottom: 8px;
     }
+
     .field{
-      background:#fff;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 12px;
-      transition: box-shadow .12s ease, border-color .12s ease;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      padding: 12px 14px;
+      transition: box-shadow .14s ease, border-color .14s ease, transform .14s ease;
     }
     .field:focus-within{
-      border-color: rgba(53,105,255,.45);
-      box-shadow: var(--ring);
+      border-color: rgba(53,105,255,.55);
+      box-shadow: var(--ring), inset 0 1px 0 rgba(255,255,255,.08);
+      transform: translateY(-1px);
     }
+
     input, textarea{
       width:100%;
       border:0;
       outline:0;
       font: inherit;
       background: transparent;
-      color: var(--text);
+      color: rgba(234,240,255,.95);
+      caret-color: #9DB4FF;
       padding: 2px 0;
+      font-size: 14px;
     }
-    input::placeholder, textarea::placeholder{ color:#94a3b8; }
+    input::placeholder, textarea::placeholder{ color: rgba(185,198,230,.58); }
 
     .actions{
       display:flex;
       flex-wrap:wrap;
       gap: 10px;
       align-items:center;
-      margin-top: 10px;
+      margin-top: 6px;
     }
 
     .btn{
+      --b: rgba(255,255,255,.16);
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:10px;
       padding: 12px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(53,105,255,.22);
-      background: rgba(53,105,255,.10);
-      color: var(--primary-800);
+      border: 1px solid var(--b);
+      background: rgba(255,255,255,.06);
+      color: rgba(234,240,255,.92);
       text-decoration:none;
-      font-weight: 800;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-weight: 900;
+      letter-spacing: -.01em;
       cursor:pointer;
       user-select:none;
+      transition: transform .14s ease, background .14s ease, border-color .14s ease, box-shadow .14s ease;
+      position:relative;
+      overflow:hidden;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(53,105,255,.14); border-color: rgba(53,105,255,.30); }
-
-    .btn-primary{
-      border-color: rgba(28,70,184,.28);
-      background: linear-gradient(180deg, var(--primary-600), var(--primary-700));
-      color:#fff;
-      box-shadow: 0 12px 24px rgba(28,70,184,.24);
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.24);
     }
-    .btn-primary:hover{ background: linear-gradient(180deg, #2e62ff, var(--primary-800)); }
 
-    .btn-danger{
-      border-color: rgba(220,38,38,.28);
-      background: rgba(220,38,38,.10);
-      color: var(--danger);
+    .btnPrimary{
+      border-color: rgba(53,105,255,.40);
+      background:
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,.24), transparent 45%),
+        linear-gradient(180deg, rgba(53,105,255,.95), rgba(42,86,214,.70));
+      box-shadow: 0 20px 45px rgba(53,105,255,.22);
+    }
+    .btnPrimary:hover{
+      box-shadow: 0 26px 55px rgba(53,105,255,.30);
+      border-color: rgba(157,180,255,.55);
+    }
+
+    .btnDanger{
+      border-color: rgba(255,59,59,.30);
+      background: rgba(255,59,59,.10);
+      color: rgba(255,235,235,.95);
     }
 
     .hint{
-      font-size: 12.5px;
-      color:#64748b;
-      margin-top: 6px;
+      margin-top: 8px;
+      color: var(--muted2);
+      font-size: 12.8px;
+      line-height: 1.45;
     }
 
-    .kicker{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      padding: 12px 14px;
-      border: 1px dashed rgba(53,105,255,.35);
-      background: rgba(234,241,255,.55);
-      border-radius: var(--radius-lg);
-      margin-top: 12px;
-      color:#3b4a68;
-      font-size: 13px;
-      font-weight: 650;
-    }
-
-    /* Footer */
     .footer{
-      margin-top: 16px;
-      padding-top: 14px;
-      border-top: 1px solid var(--line);
-      color:#64748b;
-      font-size: 12.5px;
+      margin-top: 12px;
+      padding: 14px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,.12);
       display:flex;
       flex-wrap:wrap;
       gap: 10px;
+      align-items:center;
       justify-content:space-between;
+      color: rgba(185,198,230,.85);
+      font-size: 12.8px;
+    }
+    .footer a{
+      color: rgba(234,240,255,.92);
+      text-decoration:none;
+      font-weight: 900;
+      border-bottom: 1px dashed rgba(234,240,255,.28);
+    }
+    .footer a:hover{ border-bottom-color: rgba(234,240,255,.55); }
+
+    /* Icons */
+    .icon{ width:18px;height:18px; display:inline-block; }
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(0,0,0,.40);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: var(--shadow2);
+      color: rgba(234,240,255,.95);
+      padding: 12px 14px;
+      border-radius: 14px;
+      backdrop-filter: blur(14px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 50;
+      font-weight: 800;
+      display:flex;
+      gap:10px;
       align-items:center;
     }
-    .links a{
-      color: var(--primary-800);
-      font-weight: 700;
-      text-decoration:none;
+    .toast.show{
+      opacity:1;
+      transform: translateX(-50%) translateY(0);
     }
-    .links a:hover{ text-decoration: underline; }
+    .toast .warn{
+      width:10px;height:10px;border-radius:999px;
+      background: radial-gradient(circle, var(--danger2), var(--danger));
+      box-shadow: 0 0 0 6px rgba(255,59,59,.14);
+    }
 
-    .icon{ width:18px;height:18px; display:inline-block; }
+    /* Shake animation for invalid */
+    @keyframes shake{
+      0%,100%{ transform: translateX(0); }
+      20%{ transform: translateX(-6px); }
+      40%{ transform: translateX(6px); }
+      60%{ transform: translateX(-4px); }
+      80%{ transform: translateX(4px); }
+    }
+    .shake{ animation: shake .35s ease; }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce){
+      .blob{ animation:none; }
+      .logo:after, .num:after{ animation:none; }
+      .step, .btn, .chip{ transition:none; }
+    }
   </style>
 </head>
 
 <body>
+  <div class="blob b1" aria-hidden="true"></div>
+  <div class="blob b2" aria-hidden="true"></div>
+  <div class="blob b3" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <div class="container">
-      <div class="brandrow">
-        <div class="brand">
-          <div class="logo" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M6 14.5c0-4.2 3-7.5 6.8-7.5 2.8 0 5.1 1.7 6.2 4.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M6 14.5c0 2.6 2.2 4.8 4.8 4.8 1.6 0 3-.8 3.9-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              <path d="M19 11.2l-.7 6.6" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div style="min-width:0">
-            <h1>GAConnect</h1>
-            <p class="sub">Industrial Gateway • Account & Data Deletion</p>
-          </div>
-        </div>
-
-        <a class="pill" href="#request">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="white" stroke-width="2"/>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M6 14.5c0-4.2 3-7.5 6.8-7.5 2.8 0 5.1 1.7 6.2 4.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 14.5c0 2.6 2.2 4.8 4.8 4.8 1.6 0 3-.8 3.9-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19 11.2l-.7 6.6" stroke="white" stroke-width="2" stroke-linecap="round"/>
           </svg>
-          Create Request
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <main class="page">
-    <div class="container">
-      <section class="card" aria-label="GAConnect account deletion">
-        <div class="cardhead">
-          <div class="titleblock">
-            <h2>Account Deletion Request</h2>
-            <p>
-              You can request permanent deletion of your GAConnect account and related personal data from this page.
-            </p>
-          </div>
-          <div class="meta" title="Page update date">
-            <span aria-hidden="true">🗓️</span>
-            Last updated: 2026-02-12
-          </div>
         </div>
+        <div style="min-width:0">
+          <h1>GAConnect</h1>
+          <div class="sub">Industrial Gateway • Account & Data Deletion</div>
+        </div>
+      </div>
 
-        <div class="content">
+      <a class="chip" href="#request" aria-label="Jump to request form">
+        <span class="dot" aria-hidden="true"></span>
+        Create Request
+      </a>
+    </header>
 
-          <div class="alert" role="note" aria-label="Important notice">
-            <div class="badge" aria-hidden="true">
-              <svg class="icon" viewBox="0 0 24 24" fill="none">
-                <path d="M12 9v5" stroke="#dc2626" stroke-width="2" stroke-linecap="round"/>
-                <path d="M12 17.5h.01" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/>
-                <path d="M10.3 4.7 2.6 18.1A2 2 0 0 0 4.3 21h15.4a2 2 0 0 0 1.7-2.9L13.7 4.7a2 2 0 0 0-3.4 0Z" stroke="#dc2626" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <strong>Important:</strong>
-              <p>Deletion is irreversible. After completion, you may permanently lose access to account history and app services.</p>
-            </div>
+    <section class="hero" aria-label="Account deletion page">
+      <div class="heroTop">
+        <div>
+          <h2>Account Deletion Request</h2>
+          <p>
+            Submit a request to permanently delete your GAConnect account and associated personal data.
+            This page is designed to be clear, compliant, and easy to use.
+          </p>
+        </div>
+        <div class="meta" title="Page update date">
+          <span aria-hidden="true">🗓️</span>
+          Last updated: 2026-02-12
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="main">
+        <!-- Left: steps -->
+        <div class="panel">
+          <div class="panelHeader">
+            <h3>Process</h3>
+            <span class="tag">3 steps</span>
           </div>
 
-          <div class="grid">
+          <div class="timeline">
             <div class="step">
-              <div class="stephead">
-                <div class="stepnum">1</div>
-                <div>
-                  <h3>Recommended In-App Method</h3>
-                  <p>
-                    If you can sign in, the fastest option is to use the in-app <strong>“Delete Account”</strong> flow.
-                  </p>
-
-                  <div class="kicker">
-                    <span aria-hidden="true">ℹ️</span>
-                    If you're signed in, ownership verification is typically faster.
+              <div class="num"><span>1</span></div>
+              <div>
+                <h4>Recommended in-app method</h4>
+                <p>
+                  If you can sign in, use the in-app <strong>“Delete Account”</strong> flow. It’s typically the fastest way.
+                </p>
+                <div class="note">
+                  <div aria-hidden="true">⚡</div>
+                  <div>
+                    <b>Tip</b>
+                    <small>When you’re already signed in, ownership verification is usually quicker.</small>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="step" id="request">
-              <div class="stephead">
-                <div class="stepnum">2</div>
-                <div>
-                  <h3>Web Deletion Request</h3>
-                  <p>
-                    If you cannot access the app, fill out the form below and send a request by email.
-                  </p>
-
-                  <form class="form" onsubmit="return false;">
-                    <div>
-                      <label for="email">Account email</label>
-                      <div class="field">
-                        <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
-                      </div>
-                      <div class="hint">This is used to verify account ownership.</div>
-                    </div>
-
-                    <div>
-                      <label for="reason">Request details (optional)</label>
-                      <div class="field">
-                        <textarea id="reason" rows="5" placeholder="I request deletion of my GAConnect account and associated personal data."></textarea>
-                      </div>
-                    </div>
-
-                    <div class="actions">
-                      <a class="btn btn-primary" id="mailtoBtn" href="mailto:beyzanurkarakoc@venobe.com">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M4 8l8 5 8-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          <path d="M20 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                        Send Deletion Request
-                      </a>
-
-                      <button class="btn btn-danger" type="button" id="clearBtn">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M6 7h12" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
-                          <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
-                          <path d="M8 7l1 14h6l1-14" stroke="#b91c1c" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                        Clear Form
-                      </button>
-                    </div>
-
-                    <div class="hint">
-                      The button opens your default email client and pre-fills the message with your details.
-                    </div>
-                  </form>
-                </div>
+              <div class="num"><span>2</span></div>
+              <div>
+                <h4>Send a web request</h4>
+                <p>
+                  If you cannot access the app, use the form on the right. The button opens your email client and
+                  pre-fills a compliant request.
+                </p>
               </div>
             </div>
-          </div>
 
-          <div class="step" style="margin-top:14px;">
-            <div class="stephead">
-              <div class="stepnum">3</div>
+            <div class="step">
+              <div class="num"><span>3</span></div>
               <div>
-                <h3>What Happens Next</h3>
+                <h4>What happens next</h4>
                 <ul>
                   <li>Your request is reviewed to verify account ownership.</li>
                   <li>Your account is deleted from active systems.</li>
                   <li>Some records may be retained only when legally required.</li>
                 </ul>
+                <div class="note" style="background:linear-gradient(180deg, rgba(255,59,59,.12), rgba(255,59,59,.05)); border-color: rgba(255,59,59,.22);">
+                  <div aria-hidden="true">🛑</div>
+                  <div>
+                    <b>Important</b>
+                    <small>Deletion is irreversible. You may permanently lose access to account history and services.</small>
+                  </div>
+                </div>
               </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <aside class="formCard" aria-label="Deletion request form">
+          <div class="formHead">
+            <div>
+              <h3>Create deletion request</h3>
+              <p>
+                Enter the account email to help us verify ownership. Add optional details if needed.
+              </p>
+            </div>
+          </div>
+
+          <div class="formBody">
+            <div>
+              <label for="email">Account email</label>
+              <div class="field" id="emailField">
+                <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+              <div class="hint">Used only for ownership verification and request processing.</div>
+            </div>
+
+            <div>
+              <label for="reason">Request details (optional)</label>
+              <div class="field">
+                <textarea id="reason" rows="5" placeholder="I request deletion of my GAConnect account and associated personal data."></textarea>
+              </div>
+            </div>
+
+            <div class="actions">
+              <a class="btn btnPrimary" id="mailtoBtn" href="mailto:beyzanurkarakoc@venobe.com">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 8l8 5 8-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M20 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                Send Deletion Request
+              </a>
+
+              <button class="btn btnDanger" type="button" id="clearBtn">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M6 7h12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M8 7l1 14h6l1-14" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                Clear
+              </button>
+            </div>
+
+            <div class="hint">
+              This button opens your default email client and pre-fills the message with your entries.
             </div>
           </div>
 
           <div class="footer">
-            <div class="links">
-              <span>Privacy contact: <a href="mailto:beyzanurkarakoc@venobe.com">beyzanurkarakoc@venobe.com</a></span>
-              <span style="margin-left:10px;">•</span>
-              <span style="margin-left:10px;">Policy: <a href="https://YOUR-DOMAIN/privacy.html">Privacy Policy</a></span>
+            <div>
+              Privacy contact:
+              <a href="mailto:beyzanurkarakoc@venobe.com">beyzanurkarakoc@venobe.com</a>
             </div>
-            <div>© GAConnect</div>
+            <div>
+              Policy:
+              <a href="https://YOUR-DOMAIN/privacy.html">Privacy Policy</a>
+            </div>
           </div>
+        </aside>
+      </div>
+    </section>
+  </div>
 
-          <p class="hint" style="margin-top:12px;">
-            <strong>Note:</strong> Replace the Privacy Policy link with your real URL before publishing.
-          </p>
-
-        </div>
-      </section>
-    </div>
-  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <span class="warn" aria-hidden="true"></span>
+    <span id="toastMsg">Please enter your account email.</span>
+  </div>
 
   <script>
-    // Auto-fill mailto with form data (better UX)
+    // Mailto auto-fill + small validation/toast
     const SUPPORT_EMAIL = "beyzanurkarakoc@venobe.com";
     const SUBJECT = "GAConnect Account Deletion Request";
 
-    const emailEl  = document.getElementById("email");
-    const reasonEl = document.getElementById("reason");
+    const emailEl   = document.getElementById("email");
+    const reasonEl  = document.getElementById("reason");
     const mailtoBtn = document.getElementById("mailtoBtn");
-    const clearBtn = document.getElementById("clearBtn");
+    const clearBtn  = document.getElementById("clearBtn");
+    const toast     = document.getElementById("toast");
+    const toastMsg  = document.getElementById("toastMsg");
+    const emailField = document.getElementById("emailField");
+
+    let toastTimer = null;
+
+    function showToast(msg){
+      toastMsg.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function isValidEmail(v){
+      // Simple practical check
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
 
     function buildMailto(){
       const accountEmail = (emailEl.value || "").trim();
@@ -565,14 +833,54 @@
       mailtoBtn.setAttribute("href", href);
     }
 
+    function shakeEmail(){
+      emailField.classList.remove("shake");
+      // reflow
+      void emailField.offsetWidth;
+      emailField.classList.add("shake");
+    }
+
+    // Keep href updated as user types
     emailEl.addEventListener("input", buildMailto);
     reasonEl.addEventListener("input", buildMailto);
+
+    // Validate before opening mail client
+    mailtoBtn.addEventListener("click", (e) => {
+      const v = (emailEl.value || "").trim();
+      if(!v){
+        e.preventDefault();
+        showToast("Please enter your account email.");
+        shakeEmail();
+        emailEl.focus();
+        return;
+      }
+      if(!isValidEmail(v)){
+        e.preventDefault();
+        showToast("Please enter a valid email address.");
+        shakeEmail();
+        emailEl.focus();
+        return;
+      }
+      // otherwise allow mailto
+    });
 
     clearBtn.addEventListener("click", () => {
       emailEl.value = "";
       reasonEl.value = "";
       buildMailto();
+      showToast("Form cleared.");
       emailEl.focus();
+    });
+
+    // Smooth anchor scroll (nice feel)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener("click", (e)=>{
+        const id = a.getAttribute("href");
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+      });
     });
 
     buildMailto();
