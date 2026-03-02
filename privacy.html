@@ -26,14 +26,7 @@
       color: #fff;
       padding: 24px 16px;
     }
-    header h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-    header p {
-      margin: 6px 0 0;
-      opacity: .95;
-    }
+    header h1 { margin: 0; font-size: 24px; }
     main {
       max-width: 960px;
       margin: 20px auto;
@@ -46,17 +39,6 @@
       padding: 18px;
       margin-bottom: 14px;
     }
-    h2 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      color: #0b3aa8;
-    }
-    h3 {
-      margin: 14px 0 8px;
-      font-size: 17px;
-    }
-    p, li { color: var(--muted); }
-    ul { margin: 8px 0 0 20px; }
     .lang {
       display: inline-block;
       padding: 4px 10px;
@@ -67,12 +49,17 @@
       color: #1e40af;
       margin-bottom: 10px;
     }
-    .meta {
-      font-size: 13px;
-      color: #e2e8f0;
+    h2 { margin: 0 0 10px; font-size: 20px; color: #0b3aa8; }
+    h3 { margin: 14px 0 8px; font-size: 17px; }
+    p, li { color: var(--muted); }
+    ul { margin: 8px 0 0 20px; }
+    code {
+      background: #eef2ff;
+      border-radius: 6px;
+      padding: 1px 6px;
+      color: #1e40af;
+      font-size: 0.95em;
     }
-    a { color: var(--accent); text-decoration: none; font-weight: 700; }
-    a:hover { text-decoration: underline; }
     footer {
       max-width: 960px;
       margin: 0 auto 24px;
@@ -80,13 +67,13 @@
       font-size: 13px;
       color: #64748b;
     }
+    a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <header>
     <h1>GAConnect Privacy Policy</h1>
-    <p>Canonical policy content synchronized with app assets.</p>
-    <p class="meta">Last updated: 2026-02-27</p>
   </header>
 
   <main>
@@ -99,10 +86,11 @@
       <h3>1. Data we process</h3>
       <p>Data Safety alignment (Google Play):</p>
       <ul>
-        <li>Personal info -> <code>Email address</code>: collected, not shared, required for account sign-in and account management, not processed ephemerally.</li>
-        <li>Personal info -> <code>Name</code> (profile/display name): collected, not shared, required for account management and in-app profile context, not processed ephemerally.</li>
-        <li>Personal info -> <code>User IDs</code> (account/session identifiers): collected, not shared, required for sign-in/session continuity and authorization, not processed ephemerally.</li>
+        <li>Personal info -&gt; <code>Email address</code>: collected, not shared, required for account sign-in and account management, not processed ephemerally.</li>
+        <li>Personal info -&gt; <code>Name</code> (profile/display name): collected, not shared, required for account management and in-app profile context, not processed ephemerally.</li>
+        <li>Personal info -&gt; <code>User IDs</code> (account/session identifiers): collected, not shared, required for sign-in/session continuity and authorization, not processed ephemerally.</li>
       </ul>
+
       <p>Additional in-app technical data:</p>
       <ul>
         <li>Wi-Fi SSID, gateway IP, and network metadata used to verify connection to the intended field network.</li>
@@ -157,10 +145,11 @@
       <h3>1. Isledigimiz veriler</h3>
       <p>Data Safety uyumu (Google Play):</p>
       <ul>
-        <li>Kisisel bilgiler -> <code>Email address</code>: toplanir, paylasilmaz, hesap girisi ve hesap yonetimi icin zorunludur, gecici (ephemeral) degildir.</li>
-        <li>Kisisel bilgiler -> <code>Name</code> (profil/gorunen ad): toplanir, paylasilmaz, hesap yonetimi ve uygulama ici profil baglami icin zorunludur, gecici (ephemeral) degildir.</li>
-        <li>Kisisel bilgiler -> <code>User IDs</code> (hesap/oturum tanimlayicilari): toplanir, paylasilmaz, oturum surekliligi ve yetkilendirme icin zorunludur, gecici (ephemeral) degildir.</li>
+        <li>Kisisel bilgiler -&gt; <code>Email address</code>: toplanir, paylasilmaz, hesap girisi ve hesap yonetimi icin zorunludur, gecici (ephemeral) degildir.</li>
+        <li>Kisisel bilgiler -&gt; <code>Name</code> (profil/gorunen ad): toplanir, paylasilmaz, hesap yonetimi ve uygulama ici profil baglami icin zorunludur, gecici (ephemeral) degildir.</li>
+        <li>Kisisel bilgiler -&gt; <code>User IDs</code> (hesap/oturum tanimlayicilari): toplanir, paylasilmaz, oturum surekliligi ve yetkilendirme icin zorunludur, gecici (ephemeral) degildir.</li>
       </ul>
+
       <p>Ek uygulama ici teknik veriler:</p>
       <ul>
         <li>Hedef saha agina dogru baglanmayi dogrulamak icin kullanilan Wi-Fi SSID, ag gecidi IP'si ve ag metadatasi.</li>
@@ -207,8 +196,6 @@
     </section>
   </main>
 
-  <footer>
-    Related page: <a href="./delete-account.html">Account deletion request</a>
-  </footer>
-</body>
+  </body>
 </html>
+
