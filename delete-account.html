@@ -1,828 +1,129 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>GAConnect — Account Deletion Request</title>
-
-  <!-- Optional typography (clean, modern) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+  <title>GAConnect Account Deletion</title>
   <style>
-    :root{
-      /* App-like blues (header gradient) */
-      --blue-900:#163a9c;
-      --blue-800:#1c46b8;
-      --blue-700:#2a56d6;
-      --blue-650:#2f5fe6;
-      --blue-600:#3569ff;
-      --blue-100:#eaf1ff;
-
-      /* Backgrounds */
-      --bg:#f3f6fb;
-      --bg2:#eef3ff;
-
-      /* Surfaces */
-      --card:#ffffff;
-      --card2:#ffffff;
-      --line:#e6edf7;
-
-      /* Text */
-      --text:#0f172a;
-      --muted:#475569;
-      --muted2:#64748b;
-
-      /* Status */
-      --danger:#dc2626;
-      --danger2:#ef4444;
-      --warn-bg:#fff7ed;
-      --warn-line:#fed7aa;
-
-      /* Shadows & radius */
-      --shadow: 0 18px 50px rgba(15, 23, 42, .10);
-      --shadow2: 0 12px 28px rgba(15, 23, 42, .08);
-      --shadow3: 0 8px 18px rgba(15, 23, 42, .06);
-
-      --r-xl: 20px;
-      --r-lg: 16px;
-      --r-md: 14px;
-
-      --ring: 0 0 0 4px rgba(53,105,255,.18);
-
-      --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --line: #dbe5f1;
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #1d4ed8;
+      --warn-bg: #fff7ed;
+      --warn-line: #fed7aa;
     }
-
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(1200px 520px at 50% -220px, rgba(53,105,255,.18), transparent 60%),
-        radial-gradient(900px 420px at 20% -260px, rgba(53,105,255,.10), transparent 62%),
-        linear-gradient(180deg, var(--bg2), var(--bg));
-      overflow-x:hidden;
-    }
-
-    /* Layout wrapper */
-    .wrap{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 18px 64px;
-    }
-
-    /* Top header band (like app) */
-    .topband{
-      background: linear-gradient(90deg, var(--blue-800), var(--blue-650));
-      color:#fff;
-      padding: 28px 0 68px;
-      position:relative;
-      overflow:hidden;
-      border-bottom-left-radius: 26px;
-      border-bottom-right-radius: 26px;
-      box-shadow: 0 20px 40px rgba(28,70,184,.22);
-    }
-    .topband:before{
-      content:"";
-      position:absolute;
-      inset:-40% -20% auto -20%;
-      height:240px;
-      background: radial-gradient(closest-side, rgba(255,255,255,.22), transparent 72%);
-      transform: rotate(-6deg);
-      pointer-events:none;
-    }
-
-    .topbar{
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      min-width:0;
-    }
-
-    .logo{
-      width:44px;height:44px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.22);
-      box-shadow: 0 12px 22px rgba(0,0,0,.14);
-      display:grid;
-      place-items:center;
-      flex: 0 0 auto;
-    }
-
-    .brand h1{
-      margin:0;
-      font-size: 20px;
-      font-weight: 850;
-      letter-spacing: .2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .brand .sub{
-      margin: 5px 0 0;
-      font-size: 13px;
-      opacity:.90;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.22);
-      color:#fff;
-      text-decoration:none;
-      font-weight: 750;
-      font-size: 13px;
-      box-shadow: 0 12px 20px rgba(0,0,0,.12);
-      transition: transform .12s ease, background .12s ease;
-      user-select:none;
-      cursor:pointer;
-      flex: 0 0 auto;
-    }
-    .pill:hover{ transform: translateY(-1px); background: rgba(255,255,255,.18); }
-
-    /* Page card (white like app) */
-    .page{
-      margin-top: 0;
-      padding-top: 18px;   
-    }
-
-    .card{
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .cardHead{
-      padding: 22px 22px 12px;
-      display:flex;
-      flex-wrap:wrap;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 14px;
-    }
-
-    .title h2{
-      margin:0;
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -.02em;
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
     }
-    .title p{
-      margin: 8px 0 0;
-      color: var(--muted);
-      max-width: 70ch;
-      font-size: 14px;
-    }
-
-    .meta{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      background: #f7faff;
-      border: 1px solid var(--line);
-      color: #52607a;
-      font-size: 12.5px;
-      font-weight: 750;
-      white-space: nowrap;
-    }
-
-    .content{
-      padding: 0 22px 22px;
-    }
-
-    /* Notice (app-like light warning) */
-    .alert{
-      display:flex;
-      gap: 12px;
-      align-items:flex-start;
-      background: #fff5f5;
-      border: 1px solid #fecaca;
-      border-radius: var(--r-lg);
-      padding: 14px 14px;
-      box-shadow: var(--shadow3);
-      margin: 6px 0 16px;
-    }
-    .alert .badge{
-      width:34px;height:34px;
-      border-radius: 12px;
-      display:grid;
-      place-items:center;
-      background: rgba(239,68,68,.10);
-      border: 1px solid rgba(239,68,68,.20);
-      flex: 0 0 auto;
-    }
-    .alert strong{ display:block; }
-    .alert p{ margin: 4px 0 0; color:#6b7280; font-size: 13.5px; }
-
-    /* Main grid like the app cards */
-    .main{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 10px;
-    }
-    @media (min-width: 980px){
-      .main{
-        grid-template-columns: 1.1fr .9fr;
-        align-items:start;
-      }
-    }
-
-    .panel{
-      background: var(--card2);
-      border: 1px solid var(--line);
-      border-radius: var(--r-xl);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-
-    .panelHeader{
-      padding: 14px 16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff, #fbfdff);
-    }
-    .panelHeader h3{
-      margin:0;
-      font-size: 13px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-weight: 900;
-      color: #22304a;
-    }
-    .panelHeader .tag{
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: #f7faff;
-      color: #52607a;
-      font-weight: 800;
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .timeline{
-      padding: 14px 16px 16px;
-      display:grid;
-      gap: 12px;
-    }
-
-    .step{
-      display:grid;
-      grid-template-columns: 44px 1fr;
-      gap: 12px;
-      padding: 14px 14px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, #ffffff, #fbfdff);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow3);
-      transition: transform .14s ease, box-shadow .14s ease;
-    }
-    .step:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 14px 26px rgba(15, 23, 42, .10);
-    }
-
-    .num{
-      width:44px;height:44px;
-      border-radius: 16px;
-      display:grid;
-      place-items:center;
-      font-weight: 900;
-      color: var(--blue-800);
-      background: var(--blue-100);
-      border: 1px solid rgba(53,105,255,.18);
-      box-shadow: 0 10px 18px rgba(53,105,255,.12);
-    }
-
-    .step h4{
-      margin: 4px 0 0;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: -.01em;
-      color: #142036;
-    }
-    .step p, .step li{
-      color: var(--muted);
-      margin: 8px 0 0;
-      font-size: 13.8px;
-    }
-    .step ul{ margin: 10px 0 0; padding-left: 18px; }
-
-    .note{
-      margin-top: 10px;
-      display:flex;
-      gap: 10px;
-      align-items:flex-start;
-      padding: 12px 12px;
-      border-radius: 16px;
-      border: 1px dashed rgba(53,105,255,.35);
-      background: rgba(234,241,255,.55);
-      color:#3b4a68;
-      font-size: 13px;
-      font-weight: 650;
-    }
-
-    /* Form panel (sticky on desktop like app right panel) */
-    .formCard{
-      border-radius: var(--r-xl);
-      background: var(--card);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow2);
-      overflow:hidden;
-    }
-    @media (min-width: 980px){
-      .formCard{ position: sticky; top: 16px; }
-    }
-
-    .formHead{
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff, #fbfdff);
-    }
-    .formHead h3{
-      margin:0;
-      font-size: 18px;
-      font-weight: 950;
-      letter-spacing: -.01em;
-      color: #142036;
-    }
-    .formHead p{
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 13.6px;
-    }
-
-    .formBody{
-      padding: 14px 16px 16px;
-      display:grid;
-      gap: 12px;
-    }
-
-    label{
-      display:block;
-      font-size: 13px;
-      font-weight: 850;
-      color: #2b3446;
-      margin-bottom: 6px;
-    }
-
-    .field{
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: #fff;
-      box-shadow: inset 0 1px 0 rgba(15,23,42,.02);
-      padding: 12px 14px;
-      transition: box-shadow .12s ease, border-color .12s ease, transform .12s ease;
-    }
-    .field:focus-within{
-      border-color: rgba(53,105,255,.45);
-      box-shadow: var(--ring);
-      transform: translateY(-1px);
-    }
-
-    input, textarea{
-      width:100%;
-      border:0;
-      outline:0;
-      font: inherit;
-      background: transparent;
-      color: var(--text);
-      caret-color: var(--blue-700);
-      padding: 2px 0;
-      font-size: 14px;
-    }
-    input::placeholder, textarea::placeholder{ color: #94a3b8; }
-
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      align-items:center;
-      margin-top: 6px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(53,105,255,.22);
-      background: rgba(53,105,255,.10);
-      color: var(--blue-800);
-      text-decoration:none;
-      font-weight: 900;
-      cursor:pointer;
-      user-select:none;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(53,105,255,.14);
-      border-color: rgba(53,105,255,.30);
-    }
-
-    .btnPrimary{
-      border-color: rgba(28,70,184,.28);
-      background: linear-gradient(180deg, var(--blue-600), var(--blue-700));
-      color:#fff;
-      box-shadow: 0 12px 24px rgba(28,70,184,.22);
-    }
-    .btnPrimary:hover{
-      background: linear-gradient(180deg, #2e62ff, var(--blue-900));
-      box-shadow: 0 16px 28px rgba(28,70,184,.24);
-    }
-
-    .btnDanger{
-      border-color: rgba(220,38,38,.26);
-      background: rgba(220,38,38,.08);
-      color: #b91c1c;
-    }
-
-    .hint{
-      margin-top: 8px;
-      color: var(--muted2);
-      font-size: 12.8px;
-      line-height: 1.45;
-    }
-
-    .footer{
-      margin-top: 12px;
-      padding: 14px 16px 16px;
-      border-top: 1px solid var(--line);
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      align-items:center;
-      justify-content:space-between;
-      color: #6b7280;
-      font-size: 12.8px;
-    }
-    .footer a{
-      color: var(--blue-800);
-      text-decoration:none;
-      font-weight: 900;
-    }
-    .footer a:hover{ text-decoration: underline; }
-
-    /* Icons */
-    .icon{ width:18px;height:18px; display:inline-block; }
-
-    /* Toast */
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(15,23,42,.88);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 16px 30px rgba(15,23,42,.22);
+    header {
+      background: linear-gradient(90deg, #1e40af, #2563eb);
       color: #fff;
-      padding: 12px 14px;
+      padding: 24px 16px;
+    }
+    header h1 { margin: 0; font-size: 24px; }
+    header p { margin: 6px 0 0; opacity: .95; }
+    .meta { font-size: 13px; color: #e2e8f0; }
+    main {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 0 16px 28px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
       border-radius: 14px;
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
-      z-index: 50;
-      font-weight: 800;
-      display:flex;
-      gap:10px;
-      align-items:center;
+      padding: 18px;
+      margin-bottom: 14px;
     }
-    .toast.show{
-      opacity:1;
-      transform: translateX(-50%) translateY(0);
+    .warn {
+      border: 1px solid var(--warn-line);
+      background: var(--warn-bg);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+      color: #9a3412;
+      font-weight: 700;
     }
-    .toast .warn{
-      width:10px;height:10px;border-radius:999px;
-      background: radial-gradient(circle, var(--danger2), var(--danger));
-      box-shadow: 0 0 0 6px rgba(239,68,68,.16);
+    h2 { margin: 0 0 8px; color: #0b3aa8; font-size: 20px; }
+    h3 { margin: 14px 0 8px; font-size: 17px; }
+    p, li { color: var(--muted); }
+    ul { margin: 8px 0 0 20px; }
+    .lang {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      background: #e8efff;
+      color: #1e40af;
+      margin-bottom: 10px;
     }
-
-    /* Shake animation for invalid */
-    @keyframes shake{
-      0%,100%{ transform: translateX(0); }
-      20%{ transform: translateX(-6px); }
-      40%{ transform: translateX(6px); }
-      60%{ transform: translateX(-4px); }
-      80%{ transform: translateX(4px); }
-    }
-    .shake{ animation: shake .35s ease; }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce){
-      .step, .btn, .pill{ transition:none; }
+    a { color: var(--accent); text-decoration: none; font-weight: 700; }
+    a:hover { text-decoration: underline; }
+    footer {
+      max-width: 960px;
+      margin: 0 auto 24px;
+      padding: 0 16px;
+      font-size: 13px;
+      color: #64748b;
     }
   </style>
 </head>
-
 <body>
-
-  <!-- Header band -->
-  <header class="topband">
-    <div class="topbar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M6 14.5c0-4.2 3-7.5 6.8-7.5 2.8 0 5.1 1.7 6.2 4.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6 14.5c0 2.6 2.2 4.8 4.8 4.8 1.6 0 3-.8 3.9-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            <path d="M19 11.2l-.7 6.6" stroke="white" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div style="min-width:0">
-          <h1>GAConnect</h1>
-          <div class="sub">Industrial Gateway • Account & Data Deletion</div>
-        </div>
-      </div>
-
-      <a class="pill" href="#request" aria-label="Jump to request form">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 6v6l4 2" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="white" stroke-width="2"/>
-        </svg>
-        Create Request
-      </a>
-    </div>
+  <header>
+    <h1>GAConnect Account Deletion</h1>
+    <p>Dedicated web request URL for account deletion compliance.</p>
+    <p class="meta">Last updated: 2026-02-27</p>
   </header>
 
-  <div class="wrap page">
-    <section class="card" aria-label="GAConnect account deletion page">
-      <div class="cardHead">
-        <div class="title">
-          <h2>Account Deletion Request</h2>
-          <p>
-            You can request permanent deletion of your GAConnect account and associated personal data from this page.
-          </p>
-        </div>
-        <div class="meta" title="Page update date">
-          <span aria-hidden="true">🗓️</span>
-          Last updated: 2026-02-12
-        </div>
-      </div>
+  <main>
+    <section class="card">
+      <div class="warn">Important: This operation can be irreversible depending on your organization policy.</div>
 
-      <div class="content">
+      <div class="lang">EN</div>
+      <h2>How to request account deletion</h2>
+      <ul>
+        <li>GAConnect user accounts are managed by your organization through hosted identity services.</li>
+        <li>Account deletion requests are handled through this dedicated web request URL linked inside the app.</li>
+        <li>If you can sign in, use the in-app account deletion flow first.</li>
+        <li>In-app reset tools remove only local on-device data and do not delete hosted account records.</li>
+      </ul>
 
-        <div class="alert" role="note" aria-label="Important notice">
-          <div class="badge" aria-hidden="true">
-            <svg class="icon" viewBox="0 0 24 24" fill="none">
-              <path d="M12 9v5" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
-              <path d="M12 17.5h.01" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
-              <path d="M10.3 4.7 2.6 18.1A2 2 0 0 0 4.3 21h15.4a2 2 0 0 0 1.7-2.9L13.7 4.7a2 2 0 0 0-3.4 0Z" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div>
-            <strong>Important:</strong>
-            <p>Deletion is irreversible. After completion, you may permanently lose access to account history and services.</p>
-          </div>
-        </div>
+      <h3>Support</h3>
+      <p>For account deletion or privacy questions, contact your organization administrator or GAConnect support channel.</p>
 
-        <div class="main">
-          <!-- Left: process -->
-          <div class="panel">
-            <div class="panelHeader">
-              <h3>Process</h3>
-              <span class="tag">3 steps</span>
-            </div>
-
-            <div class="timeline">
-              <div class="step">
-                <div class="num">1</div>
-                <div>
-                  <h4>Recommended in-app method</h4>
-                  <p>
-                    If you can sign in, use the in-app <strong>“Delete Account”</strong> flow. It’s typically the fastest way.
-                  </p>
-                  <div class="note">
-                    <span aria-hidden="true">ℹ️</span>
-                    If you're signed in, ownership verification is typically faster.
-                  </div>
-                </div>
-              </div>
-
-              <div class="step" id="request">
-                <div class="num">2</div>
-                <div>
-                  <h4>Web deletion request</h4>
-                  <p>
-                    If you cannot access the app, use the form to send a request by email. The button will pre-fill a compliant request.
-                  </p>
-                </div>
-              </div>
-
-              <div class="step">
-                <div class="num">3</div>
-                <div>
-                  <h4>What happens next</h4>
-                  <ul>
-                    <li>Your request is reviewed to verify account ownership.</li>
-                    <li>Your account is deleted from active systems.</li>
-                    <li>Some records may be retained only when legally required.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: form -->
-          <aside class="formCard" aria-label="Deletion request form">
-            <div class="formHead">
-              <h3>Create deletion request</h3>
-              <p>Enter the account email to help us verify ownership. Add optional details if needed.</p>
-            </div>
-
-            <div class="formBody">
-              <div>
-                <label for="email">Account email</label>
-                <div class="field" id="emailField">
-                  <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
-                </div>
-                <div class="hint">This is used only to verify account ownership and process the request.</div>
-              </div>
-
-              <div>
-                <label for="reason">Request details (optional)</label>
-                <div class="field">
-                  <textarea id="reason" rows="5" placeholder="I request deletion of my GAConnect account and associated personal data."></textarea>
-                </div>
-              </div>
-
-              <div class="actions">
-                <a class="btn btnPrimary" id="mailtoBtn" href="mailto:beyzanurkarakoc@venobe.com">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M4 8l8 5 8-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 6H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-                  </svg>
-                  Send Deletion Request
-                </a>
-
-                <button class="btn btnDanger" type="button" id="clearBtn">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M6 7h12" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke="#b91c1c" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M8 7l1 14h6l1-14" stroke="#b91c1c" stroke-width="2" stroke-linejoin="round"/>
-                  </svg>
-                  Clear
-                </button>
-              </div>
-
-              <div class="hint">
-                The button opens your default email client and pre-fills the message with your entries.
-              </div>
-            </div>
-
-            <div class="footer">
-              <div>
-                Privacy contact:
-                <a href="mailto:beyzanurkarakoc@venobe.com">beyzanurkarakoc@venobe.com</a>
-              </div>
-              <div>
-                Policy:
-                <a href="https://YOUR-DOMAIN/privacy.html">Privacy Policy</a>
-              </div>
-            </div>
-          </aside>
-        </div>
-
-      </div>
+      <h3>Related policy</h3>
+      <p><a href="./privacy.html">Open Privacy Policy</a></p>
     </section>
-  </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <span class="warn" aria-hidden="true"></span>
-    <span id="toastMsg">Please enter your account email.</span>
-  </div>
+    <section class="card">
+      <div class="lang">TR</div>
+      <h2>Hesap silme talebi nasil yapilir</h2>
+      <ul>
+        <li>GAConnect kullanici hesaplari, kurulusunuz tarafindan barindirilan kimlik hizmetleri uzerinden yonetilir.</li>
+        <li>Hesap silme talepleri, uygulama icindeki ozel web talep URL'si uzerinden yurutulur.</li>
+        <li>Giris yapabiliyorsaniz once uygulama ici hesap silme akislarini kullanin.</li>
+        <li>Uygulama ici sifirlama araclari yalnizca cihaz uzerindeki yerel verileri kaldirir; barindirilan hesap kayitlarini silmez.</li>
+      </ul>
 
-  <script>
-    // Mailto auto-fill + validation/toast
-    const SUPPORT_EMAIL = "beyzanurkarakoc@venobe.com";
-    const SUBJECT = "GAConnect Account Deletion Request";
+      <h3>Destek</h3>
+      <p>Hesap silme veya gizlilik sorulari icin kurulus yoneticinizle veya GAConnect destek kanaliyla iletisime gecin.</p>
 
-    const emailEl   = document.getElementById("email");
-    const reasonEl  = document.getElementById("reason");
-    const mailtoBtn = document.getElementById("mailtoBtn");
-    const clearBtn  = document.getElementById("clearBtn");
-    const toast     = document.getElementById("toast");
-    const toastMsg  = document.getElementById("toastMsg");
-    const emailField = document.getElementById("emailField");
+      <h3>Ilgili politika</h3>
+      <p><a href="./privacy.html">Gizlilik Politikasini ac</a></p>
+    </section>
+  </main>
 
-    let toastTimer = null;
-
-    function showToast(msg){
-      toastMsg.textContent = msg;
-      toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
-    }
-
-    function isValidEmail(v){
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    }
-
-    function buildMailto(){
-      const accountEmail = (emailEl.value || "").trim();
-      const details = (reasonEl.value || "").trim();
-
-      const bodyLines = [
-        "Hello,",
-        "",
-        "I request permanent deletion of my GAConnect account and associated personal data.",
-        "",
-        "Account email: " + (accountEmail || "[please enter your email]"),
-        details ? "" : "",
-        details ? "Request details:" : "",
-        details ? details : "",
-        "",
-        "Thank you."
-      ].filter(Boolean);
-
-      const href =
-        "mailto:" + encodeURIComponent(SUPPORT_EMAIL) +
-        "?subject=" + encodeURIComponent(SUBJECT) +
-        "&body=" + encodeURIComponent(bodyLines.join("\n"));
-
-      mailtoBtn.setAttribute("href", href);
-    }
-
-    function shakeEmail(){
-      emailField.classList.remove("shake");
-      void emailField.offsetWidth; // reflow
-      emailField.classList.add("shake");
-    }
-
-    emailEl.addEventListener("input", buildMailto);
-    reasonEl.addEventListener("input", buildMailto);
-
-    mailtoBtn.addEventListener("click", (e) => {
-      const v = (emailEl.value || "").trim();
-      if(!v){
-        e.preventDefault();
-        showToast("Please enter your account email.");
-        shakeEmail();
-        emailEl.focus();
-        return;
-      }
-      if(!isValidEmail(v)){
-        e.preventDefault();
-        showToast("Please enter a valid email address.");
-        shakeEmail();
-        emailEl.focus();
-        return;
-      }
-      // allow mailto
-    });
-
-    clearBtn.addEventListener("click", () => {
-      emailEl.value = "";
-      reasonEl.value = "";
-      buildMailto();
-      showToast("Form cleared.");
-      emailEl.focus();
-    });
-
-    // Smooth anchor scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener("click", (e)=>{
-        const id = a.getAttribute("href");
-        const el = document.querySelector(id);
-        if(!el) return;
-        e.preventDefault();
-        el.scrollIntoView({behavior:"smooth", block:"start"});
-      });
-    });
-
-    buildMailto();
-  </script>
+  <footer>
+    This page intentionally contains no placeholder links.
+  </footer>
 </body>
 </html>
