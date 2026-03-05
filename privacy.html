@@ -65,6 +65,7 @@
       line-height: 1.6;
     }
 
+    /* Top header */
     .topband{
       background: linear-gradient(90deg, var(--blue-800), var(--blue-650));
       color:#fff;
@@ -158,8 +159,10 @@
       padding: 0 18px 64px;
     }
 
+    /* FIX: prevent heading from hiding under header */
     .page{
-      margin-top: -52px;
+      margin-top: 0;
+      padding-top: 18px; /* safe space under header */
     }
 
     .card{
@@ -168,6 +171,11 @@
       border-radius: var(--r-xl);
       box-shadow: var(--shadow);
       overflow:hidden;
+      transform: translateY(-22px); /* subtle premium overlap without hiding title */
+    }
+
+    @media (max-width: 520px){
+      .card{ transform: translateY(-12px); }
     }
 
     .cardHead{
@@ -316,10 +324,6 @@
     }
 
     .icon{ width:18px;height:18px; display:inline-block; }
-
-    @media (prefers-reduced-motion: reduce){
-      .pill{ transition:none; }
-    }
   </style>
 </head>
 
@@ -475,13 +479,10 @@
             <div>
               <h3>Data Sharing</h3>
               <div class="body">
-                <p style="margin:0;color:var(--muted);">
-                  We do not sell personal data.
-                </p>
+                <p style="margin:0;color:var(--muted);">We do not sell personal data.</p>
                 <p style="margin:10px 0 0;color:var(--muted);">
                   We may share limited data with service providers strictly to operate the service (for example:
-                  identity/authentication provider, cloud hosting, diagnostics/monitoring provider), under contractual and
-                  security controls.
+                  identity/authentication provider, cloud hosting, diagnostics/monitoring provider), under contractual and security controls.
                 </p>
                 <p style="margin:10px 0 0;color:var(--muted);">
                   We may also disclose data when required by law or to protect rights, safety, and security.
@@ -521,8 +522,8 @@
                   <li>On the web: <b>[ACCOUNT_DELETION_URL]</b></li>
                 </ul>
                 <div style="margin-top:10px;color:var(--muted);">
-                  When an account deletion request is completed, associated account data is deleted unless retention is required
-                  by law, security, fraud prevention, or regulatory obligations. Where retention is required, we inform users accordingly.
+                  When an account deletion request is completed, associated account data is deleted unless retention is required by law,
+                  security, fraud prevention, or regulatory obligations. Where retention is required, we inform users accordingly.
                 </div>
               </div>
             </div>
